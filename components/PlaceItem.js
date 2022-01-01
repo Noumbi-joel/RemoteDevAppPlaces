@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 18,
     marginBottom: 5,
+    fontFamily: "poppins-bold",
   },
   address: {
     color: "#666",

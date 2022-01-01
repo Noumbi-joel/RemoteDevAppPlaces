@@ -15,6 +15,7 @@ import ImgPicker from "../components/ImageSelector";
 
 const NewPlaceScreen = (props) => {
   const [titleValue, setTitleValue] = useState("");
+  const [selectedImage, setSelectedImage] = useState();
   const titleChangeHandler = (text) => {
     //you could add validation
     setTitleValue(text);
@@ -23,8 +24,12 @@ const NewPlaceScreen = (props) => {
   const dispatch = useDispatch();
 
   const savePlaceHandler = () => {
-    dispatch(placesActions.addPlace(titleValue));
+    dispatch(placesActions.addPlace(titleValue, selectedImage));
     props.navigation.goBack();
+  };
+
+  const imageTakenHandler = (imagePath) => {
+    setSelectedImage(imagePath);
   };
 
   return (
@@ -36,7 +41,7 @@ const NewPlaceScreen = (props) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-        <ImgPicker />
+        <ImgPicker onImageTaken={imageTakenHandler} />
         <Button
           title="Save Place"
           color={Colors.primary}
@@ -60,6 +65,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     marginBottom: 15,
+    fontFamily: "poppins-regular",
   },
   textInput: {
     borderBottomColor: "#ccc",
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingVertical: 4,
     paddingHorizontal: 2,
+    fontFamily: "poppins-bold",
   },
 });
 

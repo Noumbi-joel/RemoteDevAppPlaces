@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
-//import { StyleSheet, Text, View } from "react-native";
+
+//SQLite
+import { init } from "./helpers/db";
 
 //app loading
 import * as Font from "expo-font";
@@ -13,6 +15,15 @@ import PlacesNavigator from "./navigator/PlacesNavigator";
 
 //reducers
 import placesReducers from "./store/reducers/places";
+
+init()
+  .then(() => {
+    console.log("Initialized database");
+  })
+  .catch((err) => {
+    console.log("Initialized database failed.");
+    console.log(err);
+  });
 
 const rootReducers = combineReducers({
   places: placesReducers,

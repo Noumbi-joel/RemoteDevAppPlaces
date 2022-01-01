@@ -4,7 +4,7 @@ import Colors from "../constants/Colors";
 
 import * as ImagePicker from "expo-image-picker";
 
-const ImgPicker = () => {
+const ImgPicker = (props) => {
   /* const verifyPermission = async () => {
     const result = await ImagePicker.requestCameraPermissionsAsync();
     if (result.status !== "granted") {
@@ -35,12 +35,15 @@ const ImgPicker = () => {
     });
 
     setImagePicked(result.uri);
+    props.onImageTaken(result.uri);
   };
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
         {!imagePicked ? (
-          <Text>No image picked yet.</Text>
+          <Text style={{ fontFamily: "poppins-regular" }}>
+            No image picked yet.
+          </Text>
         ) : (
           <Image style={styles.image} source={{ uri: imagePicked }} />
         )}
@@ -57,6 +60,7 @@ const ImgPicker = () => {
 const styles = StyleSheet.create({
   imagePicker: {
     alignItems: "center",
+    marginBottom: 15,
   },
   imagePreview: {
     width: "100%",
